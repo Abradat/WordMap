@@ -16,7 +16,7 @@ class WorldMap():
     def __init__(self):
         self.normalizer =  Normalizer()
 
-        #Pop Artistss
+        #Pop Artists
         self.babakJDict = {}
         self.babakText = ""
 
@@ -79,12 +79,6 @@ class WorldMap():
                             self.babakJDict[word] = 1
                             self.popDict[word] = 1
 
-        #print "\n\n\n going to write to file"
-
-        #sortedBabak = sorted(self.babakJDict.items(), key=operator.itemgetter(1))
-        #fo.write(self.babakJDict)
-        #for key in sortedBabak :
-        #    print( key[0]  + "is : " + str(key[1]) + "\n")
 
         print "done\n\n"
 
@@ -115,10 +109,6 @@ class WorldMap():
                             self.mohsenYDict[word] = 1
                             self.popDict[word] = 1
 
-        #sortedMohsen = sorted(self.mohsenYDict.items(), key=operator.itemgetter(1))
-        #fo.write(self.babakJDict)
-        #for key in sortedMohsen :
-         #   print( key[0]  + "is : " + str(key[1]) + "\n")
 
         print "done\n\n"
 
@@ -156,9 +146,6 @@ class WorldMap():
         print "\n\n\n going to write to file"
 
         sortedHichkas = sorted(self.hichkasDict.items(), key=operator.itemgetter(1))
-        #fo.write(self.babakJDict)
-        #for key in sortedHichkas :
-            #print( key[0]  + "is : " + str(key[1]) + "\n")
 
         print "done\n\n"
 
@@ -189,11 +176,6 @@ class WorldMap():
                             self.bahramDict[word] = 1
                             self.rapDict[word] = 1
 
-
-        #sortedBahram = sorted(self.bahramDict.items(), key=operator.itemgetter(1))
-        #fo.write(self.babakJDict)
-        #for key in sortedBahram :
-        #    print( key[0]  + "is : " + str(key[1]) + "\n")
 
         print "done\n\n"
 
@@ -226,11 +208,6 @@ class WorldMap():
 
         print "\n\n\n going to write to file"
 
-        #sortedKhalvat = sorted(self.khalvatDict.items(), key=operator.itemgetter(1))
-        #fo.write(self.babakJDict)
-        #for key in sortedKhalvat :
-        #    print( key[0]  + "is : " + str(key[1]) + "\n")
-
         print "done\n\n"
 
     def qufWorldMap(self):
@@ -262,11 +239,6 @@ class WorldMap():
 
         print "\n\n\n going to write to file"
 
-        #sortedQuf = sorted(self.qufDict.items(), key=operator.itemgetter(1))
-        #fo.write(self.babakJDict)
-        #for key in sortedQuf :
-        #    print( key[0]  + "is : " + str(key[1]) + "\n")
-
         print "done\n\n"
 
     def sorenaWorldMap(self):
@@ -296,11 +268,6 @@ class WorldMap():
                             self.sorenaDict[word] = 1
                             self.rapDict[word] = 1
 
-
-        #sortedSorena = sorted(self.sorenaDict.items(), key=operator.itemgetter(1))
-        #fo.write(self.babakJDict)
-        #for key in sortedSorena :
-        #    print( key[0]  + "is : " + str(key[1]) + "\n")
 
         print "done\n\n"
 

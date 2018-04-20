@@ -17,3 +17,12 @@ Rap artists choosen :
 
 ## Processing the lyrics
 Normalization and Tokenizing the lyrics is done by [hazm](http://www.sobhe.ir/hazm/) python module.
+after normalizing and extracting the words, we store the words and how many times they were repeated in the lyrics in the artist's exclusive dictionary and category's dictionary (example : Mohsen Yeganeh words are stored in mohsenYDict and popDict)
+by founding out the exact number of words repeatition, we can now have our word maps.
+
+
+## Results
+### Pop
+The main message from pop songs is talking from love and they address their beloved and their heart and feelings and tell them about things that they could do but didn't and they express their regret. They talk about their wishes and what are they going to do for their beloved and their life and telling their beloved filled their minds always.
+
+### Rap

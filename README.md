@@ -26,3 +26,4 @@ by founding out the exact number of words repeatition, we can now have our word 
 The main message from pop songs is talking from love and they address their beloved and their heart and feelings and tell them about things that they could do but didn't and they express their regret. They talk about their wishes and what are they going to do for their beloved and their life and telling their beloved filled their minds always.
 
 ### Rap
+Rappers try to convey their critical messages. They criticize the political and social situation and the lives of people Or emphasize on empowerment or self-improvement. They speak more of themselves or of collective movements in their poems and talk directly to their audience. The use of conditional sentences and the unavoidable aspirations and frustrations of other features of their poetry. Most of their messages contain negative sentences

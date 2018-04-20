@@ -15,4 +15,5 @@ Rap artists choosen :
 - Ali Sorena : 10 songs
 - Quf : 8 songs
 
-## Processing the songs
+## Processing the lyrics
+Normalization and Tokenizing the lyrics is done by [hazm](http://www.sobhe.ir/hazm/) python module.

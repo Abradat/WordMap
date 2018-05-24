@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 import io
 from hazm import *
-from wordcloud import WordCloud
+from WordCloud import WordCloud
 import matplotlib.pyplot as plt
 import glob
 import operator
@@ -26,6 +26,9 @@ class WorldMap():
         self.popDict = {}
         self.popText = ""
 
+        self.wordProbPop = {}
+
+
         #Rap Artists
         self.bahramDict = {}
         self.bahramText = ""
@@ -44,17 +47,24 @@ class WorldMap():
 
         self.rapDict = {}
         self.rapText = ""
+        self.wordProbRap = {}
 
         #Common, Diff
         self.commonDict = {}
         self.commonText = ""
-        self.diffDict = {}
-        self.diffText = ""
+        #self.diffDict = {}
+        self.rapDiffDict = {}
+        self.popDiffDict = {}
+        #self.diffText = ""
+        self.rapDiffText = ""
+        self.popDiffText = ""
+
+        self.totalTokens = 0;
 
 
     def babakWorldMap(self):
         print "entered babak word map\n"
-        path = "lyrics/pop/Babak Jahanbakhsh/*.txt"
+        path = "../lyrics/train/pop/Babak Jahanbakhsh/*.txt"
 
         for filename in glob.glob(path):
             with io.open(filename, 'r', encoding="utf-8") as f:
@@ -71,6 +81,7 @@ class WorldMap():
                     if word not in self.junks:
                         self.babakText += ' ' + word
                         self.popText += ' ' + word
+                        self.totalTokens += 1;
 
                         if word in self.babakJDict :
                             self.babakJDict[word] += 1
@@ -90,7 +101,7 @@ class WorldMap():
 
     def mohsenWorldMap(self):
         print "entered mohsen word map\n"
-        path = "lyrics/pop/Mohsen Yeganeh/*.txt"
+        path = "../lyrics/train/pop/Mohsen Yeganeh/*.txt"
 
         for filename in glob.glob(path):
             with io.open(filename, 'r', encoding="utf-8") as f:
@@ -107,6 +118,7 @@ class WorldMap():
                     if word not in self.junks:
                         self.mohsenText += ' ' + word
                         self.popText += ' ' + word
+                        self.totalTokens += 1
 
                         if word in self.mohsenYDict :
                             self.mohsenYDict[word] += 1
@@ -128,7 +140,7 @@ class WorldMap():
 
     def hichkasWorldMap(self):
         print "entered hichkas word map\n"
-        path = "lyrics/rap/Hichkas/*.txt"
+        path = "../lyrics/train/rap/Hichkas/*.txt"
 
         for filename in glob.glob(path):
             with io.open(filename, 'r', encoding="utf-8") as f:
@@ -145,6 +157,7 @@ class WorldMap():
                     if word not in self.junks:
                         self.hichkasText += ' ' + word
                         self.rapText += ' ' + word
+                        self.totalTokens += 1
 
                         if word in self.hichkasDict :
                             self.hichkasDict[word] += 1
@@ -164,7 +177,7 @@ class WorldMap():
 
     def bahramWorldMap(self):
         print "entered bahram word map\n"
-        path = "lyrics/rap/Bahram/*.txt"
+        path = "../lyrics/train/rap/Bahram/*.txt"
 
         for filename in glob.glob(path):
             with io.open(filename, 'r', encoding="utf-8") as f:
@@ -181,6 +194,7 @@ class WorldMap():
                     if word not in self.junks:
                         self.bahramText += ' ' + word
                         self.rapText += ' ' + word
+                        self.totalTokens += 1
 
                         if word in self.bahramDict :
                             self.bahramDict[word] += 1
@@ -199,7 +213,7 @@ class WorldMap():
 
     def khalvatWorldMap(self):
         print "entered khalvat word map\n"
-        path = "lyrics/rap/Khalvat/*.txt"
+        path = "../lyrics/train/rap/Khalvat/*.txt"
 
         for filename in glob.glob(path):
             with io.open(filename, 'r', encoding="utf-8") as f:
@@ -216,6 +230,7 @@ class WorldMap():
                     if word not in self.junks:
                         self.khalvatText += ' ' + word
                         self.rapText += ' ' + word
+                        self.totalTokens += 1
 
                         if word in self.khalvatDict :
                             self.khalvatDict[word] += 1
@@ -235,7 +250,7 @@ class WorldMap():
 
     def qufWorldMap(self):
         print "entered quf word map\n"
-        path = "lyrics/rap/Quf/*.txt"
+        path = "../lyrics/train/rap/Quf/*.txt"
 
         for filename in glob.glob(path):
             with io.open(filename, 'r', encoding="utf-8") as f:
@@ -252,6 +267,7 @@ class WorldMap():
                     if word not in self.junks:
                         self.qufText += ' ' + word
                         self.rapText += ' ' + word
+                        self.totalTokens += 1
 
                         if word in self.qufDict :
                             self.qufDict[word] += 1
@@ -271,7 +287,7 @@ class WorldMap():
 
     def sorenaWorldMap(self):
         print "entered sorena word map\n"
-        path = "lyrics/rap/Sorena/*.txt"
+        path = "../lyrics/train/rap/Sorena/*.txt"
 
         for filename in glob.glob(path):
             with io.open(filename, 'r', encoding="utf-8") as f:
@@ -288,6 +304,7 @@ class WorldMap():
                     if word not in self.junks:
                         self.sorenaText += ' ' + word
                         self.rapText += ' ' + word
+                        self.totalTokens += 1
 
                         if word in self.sorenaDict :
                             self.sorenaDict[word] += 1
@@ -304,7 +321,7 @@ class WorldMap():
 
         print "done\n\n"
 
-    def commonDicts(self):
+    '''def commonDicts(self):
         for rapItem in self.rapDict :
             if( rapItem in self.popDict) :
                 self.commonDict[rapItem] = min(self.rapDict[rapItem], self.popDict[rapItem])
@@ -345,7 +362,41 @@ class WorldMap():
         self.sortedDiff = sorted(self.diffDict.items(), key=operator.itemgetter(1))
 
         print "done\n\n"
+    '''
 
+    def dictHandler(self):
+        for rapItem in self.rapDict :
+            self.wordProbRap = (self.rapDict[rapItem] * 1.0) / self.totalTokens
+
+        for popItem in self.popDict :
+            self.wordProbPop = (self.popDict[popItem] * 1.0) / self.totalTokens
+
+        for rapProbItem in self.wordProbRap :
+            if(rapProbItem in self.wordProbPop) :
+                if(self.wordProbRap[rapProbItem] > self.wordProbPop[rapProbItem]):
+                    self.rapDiffDict[rapProbItem] = int((self.wordProbRap[rapProbItem] - self.wordProbPop[rapProbItem]) * 100000)
+            else :
+                self.rapDiffDict[rapProbItem] = int(self.wordProbRap[rapProbItem] * 100000)
+
+        for popProbItem in self.wordProbPop :
+            if(popProbItem not in self.wordProbRap):
+                if(self.wordProbPop[popProbItem] > self.wordProbRap[popProbItem]):
+                    self.popDiffDict[popProbItem] = int((self.wordProbPop[popProbItem] - self.wordProbRap[popProbItem]) * 100000)
+            else :
+                self.popDiffDict[popProbItem] = int(self.wordProbPop[popProbItem] * 100000)
+
+
+        for item in self.rapDiffDict :
+            self.rapDiffText += (item + ' ') * self.rapDiffDict[item]
+        for item in self.popDiffDict :
+            self.popDiffText += (item + ' ') * self.popDiffDict[item]
+
+        for item in self.wordProbRap :
+            if(item in self.wordProbPop) :
+                self.commonDict[item] = int((self.wordProbPop[item] + self.wordProbRap[item]) * 100000)
+
+        for item in self.commonDict :
+            self.commonText += (item + ' ') * self.commonDict[item]
     def reshaper(self):
         self.popText = arabic_reshaper.reshape(self.popText)
         self.popText = get_display(self.popText)
@@ -377,9 +428,13 @@ class WorldMap():
         self.commonText = arabic_reshaper.reshape(self.commonText)
         self.commonText = get_display(self.commonText)
 
+        self.rapDiffText = arabic_reshaper.reshape(self.rapDiffText)
+        self.rapDiffText = get_display(self.rapDiffText)
 
-        self.diffText = arabic_reshaper.reshape(self.diffText)
-        self.diffText = get_display(self.diffText)
+        self.popDiffText = arabic_reshaper.reshape(self.popDiffText)
+        self.popDiffText = get_display(self.popDiffText)
+        #self.diffText = arabic_reshaper.reshape(self.diffText)
+        #self.diffText = get_display(self.diffText)
 
     def wordCloudShow(self, num):
         if(num == 1):
@@ -401,6 +456,7 @@ class WorldMap():
             popWordCloud.generate(self.popText)
             plt.imshow(popWordCloud)
             plt.axis("off")
+
             plt.show()
 
         elif(num == 4):
@@ -448,14 +504,22 @@ class WorldMap():
         elif(num == 10):
             commonWordCloud = WordCloud(font_path='Far_KoodkBd.ttf', background_color='white', height=4000, width=4000)
             commonWordCloud.generate(self.commonText)
+            commonWordCloud.collocations = False
             plt.imshow(commonWordCloud)
             plt.axis("off")
             plt.show()
 
         elif(num == 11):
-            diffWordCloud = WordCloud(font_path='Far_KoodkBd.ttf', background_color='white', height=4000, width=4000)
-            diffWordCloud.generate(self.diffText)
-            plt.imshow(diffWordCloud)
+            rapDiffWordCloud = WordCloud(font_path='Far_KoodkBd.ttf', background_color='white', height=4000, width=4000)
+            rapDiffWordCloud.generate(self.rapDiffText)
+            plt.imshow(rapDiffWordCloud)
+            plt.axis("off")
+            plt.show()
+
+        elif(num == 12):
+            popDiffWordCloud = WordCloud(font_path='Far_KoodkBd.ttf', background_color='white', height=4000, width=4000)
+            popDiffWordCloud.generate(self.popDiffText)
+            plt.imshow(popDiffWordCloud)
             plt.axis("off")
             plt.show()
 
@@ -467,23 +531,10 @@ class WorldMap():
         self.khalvatWorldMap()
         self.qufWorldMap()
         self.sorenaWorldMap()
-
-        self.commonDicts()
-        self.diffDicts()
-
-        self.sortDicts()
+        self.dictHandler()
 
         self.reshaper()
         self.wordCloudShow(11)
-
-
-
-
-
-        #for key in self.sortedCommon:
-        #    print (key[0] + "is : " + str(key[1]) + "\n")
-
-
 
 a = WorldMap()
 a.handler()

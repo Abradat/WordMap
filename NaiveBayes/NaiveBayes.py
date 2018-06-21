@@ -115,6 +115,17 @@ class Smooth():
             else :
                 self.wordProbRap[item] = math.log(1.0 / (len(self.rapDict) + self.totalTokens), 10)
 
+    def withoutFirst(self):
+        for item in self.totalDict :
+            if(item in self.popDict):
+                self.wordProbPop[item] = math.log((self.popDict[item] ) * 1.0 / (self.totalTokens), 10)
+            else :
+                self.wordProbPop[item] = 0.5
+
+            if(item in self.rapDict):
+                self.wordProbRap[item] = math.log((self.rapDict[item]) * 1.0 / ( self.totalTokens), 10)
+            else :
+                self.wordProbRap[item] =0.5
     def testHandler(self):
 
         paths = ["../lyrics/test/pop/Babak Jahanbakhsh/*.txt",
@@ -179,6 +190,8 @@ class Smooth():
     def handler(self):
         self.pop()
         self.rap()
+
+        #self.withoutFirst()
         self.dictHandler()
         self.testHandler()
 
